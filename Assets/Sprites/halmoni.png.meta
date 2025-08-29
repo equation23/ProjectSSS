@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      halmoni_0: 5660778534962921104
+      halmoni_1: 5164513745427541781
+      halmoni_2: -8769359099624858585
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
