@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 8675a077b52cbe7459e9def1666a1720
+AssetOrigin:
+  serializedVersion: 1
+  productId: 221542
+  packageName: Pixel Prototype Player Sprites
+  packageVersion: 1.3
+  assetPath: Assets/DeadRevolver/PixelPrototypePlayerSprites/Art/Sprites/Run/Run01.png
+  uploadId: 701437
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,7 +74,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -80,7 +87,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +100,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -108,8 +115,31 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Run01_0
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 0
+        width: 22
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c9e715772a594e40b2ad4314466545e
+      internalID: 2096246766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -119,16 +149,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Run01_0: 2096246766
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 221542
-  packageName: Pixel Prototype Player Sprites
-  packageVersion: 1.3
-  assetPath: Assets/DeadRevolver/PixelPrototypePlayerSprites/Art/Sprites/Run/Run01.png
-  uploadId: 701437
