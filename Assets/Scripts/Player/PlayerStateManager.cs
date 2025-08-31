@@ -7,12 +7,18 @@ public class PlayerStateManager
 
     public Player_Idle idleState;
     public Player_Jump jumpState;
+    public Player_Fall fallState;
+    public Player_Land landState;
+    public Player_Run runState;
 
 
     public PlayerStateManager(PlayerController player)
     {
         this.idleState = new Player_Idle(player);
         this.jumpState = new Player_Jump(player);
+        this.fallState = new Player_Fall(player);
+        this.landState = new Player_Land(player);
+        this.runState = new Player_Run(player);
     }
     public void Initialize(IState startingState)
     {

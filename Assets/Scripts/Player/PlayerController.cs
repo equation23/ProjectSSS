@@ -3,19 +3,26 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     [Header("Settings")]
-    public float JumpForce;
+    public float jumpForce;
+    public float moveSpeed;
+
 
     public PlayerStateManager stateManager;
 
     [Header("References")]
     public Rigidbody2D rigidBody;
 
+    [HideInInspector] public Animator animator;
+
     [Header("References")]
     public BoxCollider2D boxCollider;   // Player의 Collider
     public LayerMask obstacleLayer;
 
+
+    [HideInInspector] public float moveInput;
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>(); // Player에 Rigidbody2D 컴포넌트가 있어야 함
     }
     void Start()
@@ -29,6 +36,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (stateManager != null)
         {
+            moveInput = Input.GetAxisRaw("Horizontal");
             stateManager.Update();
         }
     }

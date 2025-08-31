@@ -1,3 +1,4 @@
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class Player_Idle : IState
@@ -8,13 +9,19 @@ public class Player_Idle : IState
     public void Enter() 
     {
         //Debug.Log("Move !!!");
+        player.animator.Play("Idle"); 
     }
     public void Update()
     {
+        if (player.moveInput != 0)
+            player.stateManager.TransitionTo(player.stateManager.runState);
+        
+        if (player.rigidBody.linearVelocity.y < -0.1f)
+            player.stateManager.TransitionTo(player.stateManager.fallState);
+
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             player.stateManager.TransitionTo(player.stateManager.jumpState);
-        }
+ 
     }
     public void Action() 
     {
