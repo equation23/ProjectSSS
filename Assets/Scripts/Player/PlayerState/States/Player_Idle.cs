@@ -26,7 +26,8 @@ public class Player_Idle : IState
     public void Action() 
     {
     }
-    public void Exit() 
-    { 
+    public void Exit()
+    {
+        player.ePrevState = EPlayerStates.idleState;
     }
 }

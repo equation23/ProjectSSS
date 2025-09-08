@@ -6,11 +6,13 @@ public class Player_Land : IState
     public Player_Land(PlayerController player) { this.player = player; }
     public void Enter()
     {
+        //player.rigidBody.linearVelocity = new Vector2(0, player.rigidBody.linearVelocity.y);
+
         player.animator.Play("Land");
     }
     public void Update()
     {
-
+        player.MovePlayer();
         AnimatorStateInfo stateInfo = player.animator.GetCurrentAnimatorStateInfo(0);
 
         if (stateInfo.IsName("Land") && stateInfo.normalizedTime >= 1.0f)
@@ -23,6 +25,7 @@ public class Player_Land : IState
     }
     public void Exit()
     {
+        player.ePrevState = EPlayerStates.landState;
     }
 }
 

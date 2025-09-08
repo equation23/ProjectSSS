@@ -16,7 +16,13 @@ public class Player_Jump : IState
         if (player.moveInput != 0)
             player.transform.localScale = new Vector3(player.moveInput, 1, 1);
 
-        player.rigidBody.linearVelocity = new Vector2(player.moveInput * player.moveSpeed, player.rigidBody.linearVelocity.y);
+        // player.rigidBody.linearVelocity = new Vector2(player.moveInput * player.moveSpeed, player.rigidBody.linearVelocity.y);
+        if (Input.GetKeyDown(KeyCode.Space) && player.IsTouchingWall())
+        {
+            player.stateManager.TransitionTo(player.stateManager.wallJumpState);
+            return;
+        }
+        player.MovePlayer();
 
         if (player.rigidBody.linearVelocity.y < 0)
         {
@@ -27,6 +33,7 @@ public class Player_Jump : IState
     {
     }
     public void Exit() 
-    { 
+    {
+        player.ePrevState = EPlayerStates.jumpState;
     }
 }

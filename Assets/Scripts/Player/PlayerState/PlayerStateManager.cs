@@ -10,6 +10,8 @@ public class PlayerStateManager
     public Player_Fall fallState;
     public Player_Land landState;
     public Player_Run runState;
+    public Player_WallSlide wallSlideState;
+    public Player_WallJump wallJumpState;
 
 
     public PlayerStateManager(PlayerController player)
@@ -19,6 +21,8 @@ public class PlayerStateManager
         this.fallState = new Player_Fall(player);
         this.landState = new Player_Land(player);
         this.runState = new Player_Run(player);
+        this.wallSlideState = new Player_WallSlide(player);
+        this.wallJumpState = new Player_WallJump(player);
     }
     public void Initialize(IState startingState)
     {

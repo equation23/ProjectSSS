@@ -10,7 +10,9 @@ public class Player_Run : IState
     }
     public void Update()
     {
-        player.rigidBody.linearVelocity = new Vector2(player.moveInput * player.moveSpeed, player.rigidBody.linearVelocity.y);
+        //  player.rigidBody.linearVelocity = new Vector2(player.moveInput * player.moveSpeed, player.rigidBody.linearVelocity.y);
+
+        player.MovePlayer();
 
         // 방향 전환
         if (player.moveInput != 0)
@@ -34,5 +36,6 @@ public class Player_Run : IState
     }
     public void Exit()
     {
+        player.ePrevState = EPlayerStates.runState;
     }
 }
