@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Card : Card_Interface
+public class Card
 {
     virtual public void Using_Card(CardUsing_Interface cardUsingObject) { }
 }

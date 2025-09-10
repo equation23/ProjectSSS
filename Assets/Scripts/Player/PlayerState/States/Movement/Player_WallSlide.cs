@@ -1,15 +1,24 @@
 using UnityEngine;
 
-public class Player_WallSlide : IState
+public class Player_WallSlide : PlayerStateBase
+
 {
-    private PlayerController player;
-    public Player_WallSlide(PlayerController player) { this.player = player; }
+
+    public Player_WallSlide(PlayerController player) :base(player)
+    {
+
+    }
     private float wallSlideSpeed = -2f;
-    public void Enter()
+
+    public override void Initialize()
+    {
+
+    }
+    public override void Enter()
     {
         player.animator.Play("WallSlide");
     }
-    public void Update()
+    public override void Update()
     {
         // 속도를 항상 일정하게 고정
         Vector2 velocity = player.rigidBody.linearVelocity;
@@ -34,10 +43,8 @@ public class Player_WallSlide : IState
         else if (!player.IsTouchingWall())
             player.stateManager.TransitionTo(player.stateManager.fallState);
     }
-    public void Action()
-    {
-    }
-    public void Exit()
+
+    public override void Exit()
     {
         player.ePrevState = EPlayerStates.wallSlideState;
     }

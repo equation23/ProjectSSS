@@ -1,15 +1,20 @@
 using UnityEngine;
 
-public class Player_Fall : IState
+public class Player_Fall : PlayerStateBase
 {
+    public Player_Fall(PlayerController player) : base(player)
+    {
 
-    private PlayerController player;
-    public Player_Fall(PlayerController player) { this.player = player; }
-    public void Enter()
+    }
+    public override void Initialize()
+    {
+
+    }
+    public override void Enter()
     {
         player.animator.Play("JumpFall");
     }
-    public void Update()
+    public override void Update()
     {
         // 방향 전환
         if (player.moveInput != 0)
@@ -32,10 +37,7 @@ public class Player_Fall : IState
             
         
     }
-    public void Action()
-    {
-    }
-    public void Exit()
+    public override void Exit()
     {
         player.ePrevState = EPlayerStates.fallState;
     }

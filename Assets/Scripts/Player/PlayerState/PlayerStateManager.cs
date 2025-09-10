@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Threading;
+using NUnit.Framework;
 using UnityEngine;
+using static UnityEditor.VersionControl.Asset;
 
 public class PlayerStateManager
 {
@@ -15,23 +19,30 @@ public class PlayerStateManager
     public Player_RunToIdle runToIdleState;
     public Player_Attack_GunFire gunfireState;
     public Player_Attack_GunRunFire gunRunfireState;
+    public Player_Attack_Sword swordAttackState;
 
-
+    private List<IState> states;
     public PlayerStateManager(PlayerController player)
     {
-        this.idleState = new Player_Idle(player);
-        this.jumpState = new Player_Jump(player);
-        this.fallState = new Player_Fall(player);
-        this.landState = new Player_Land(player);
-        this.runState = new Player_Run(player);
-        this.wallSlideState = new Player_WallSlide(player);
-        this.wallJumpState = new Player_WallJump(player);
-        this.runToIdleState = new Player_RunToIdle(player);
-        this.gunfireState = new Player_Attack_GunFire(player);
-        this.gunRunfireState = new Player_Attack_GunRunFire(player);
+        states = new List<IState> ();
+        idleState = AddState<Player_Idle>(player, states);
+        jumpState = AddState<Player_Jump>(player, states);
+        fallState = AddState<Player_Fall>(player, states);
+        landState = AddState<Player_Land>(player, states);
+        runState = AddState<Player_Run>(player, states);
+        wallSlideState = AddState<Player_WallSlide>(player, states);
+        wallJumpState = AddState<Player_WallJump>(player, states);
+        runToIdleState = AddState<Player_RunToIdle>(player, states);
+        gunfireState = AddState<Player_Attack_GunFire>(player, states);
+        gunRunfireState = AddState<Player_Attack_GunRunFire>(player, states);
+        swordAttackState = AddState<Player_Attack_Sword>(player, states);
     }
     public void Initialize(IState startingState)
     {
+        for (int i = 0; i < states.Count; i++)
+            states[i].Initialize();
+  
+
         CurrentState = startingState;
         startingState.Enter();
     }
@@ -49,5 +60,16 @@ public class PlayerStateManager
         {
             CurrentState.Update();
         }
+    }
+
+    public void TransitionToAttack(string cardName)
+    {
+        CurrentState.CardAction(cardName);
+    }
+    private T AddState<T>(PlayerController player, List<IState> states) where T : IState
+    {
+        var state = (T)Activator.CreateInstance(typeof(T), new object[] { player });
+        states.Add(state);
+        return state;
     }
 }

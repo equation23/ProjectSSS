@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Player_Attack_GunFire : PlayerStateBase
+public class Player_Attack_Sword : PlayerStateBase
 {
 
-    public Player_Attack_GunFire(PlayerController player) :base(player)
+    public Player_Attack_Sword(PlayerController player) : base(player)
     {
 
     }
@@ -15,14 +15,14 @@ public class Player_Attack_GunFire : PlayerStateBase
     {
         //player.rigidBody.linearVelocity = new Vector2(0, player.rigidBody.linearVelocity.y);
 
-        player.animator.Play("GunFire");
+        player.animator.Play("SwordAttack");
     }
     public override void Update()
     {
 
         AnimatorStateInfo stateInfo = player.animator.GetCurrentAnimatorStateInfo(0);
 
-        if (stateInfo.IsName("GunFire") && stateInfo.normalizedTime >= 1.0f)
+        if (stateInfo.IsName("SwordAttack") && stateInfo.normalizedTime >= 1.0f)
         {
             player.stateManager.TransitionTo(player.stateManager.idleState);
         }
@@ -30,7 +30,7 @@ public class Player_Attack_GunFire : PlayerStateBase
     }
     public override void Exit()
     {
-        player.ePrevState = EPlayerStates.attack_GunFire;
+        player.ePrevState = EPlayerStates.attack_SwordAttack;
 
     }
 }

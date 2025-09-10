@@ -1,14 +1,21 @@
 using UnityEngine;
 
-public class Player_RunToIdle : IState
+public class Player_RunToIdle : PlayerStateBase
 {
-    private PlayerController player;
-    public Player_RunToIdle(PlayerController player) { this.player = player; }
-    public void Enter()
+
+    public Player_RunToIdle(PlayerController player) :base(player)
+    {
+      
+    }
+    public override void Initialize()
+    {
+        cardTransitions["GunFire"] = player.stateManager.gunfireState;
+    }
+    public override void Enter()
     {
         player.animator.Play("RunToIdle");
     }
-    public void Update()
+    public override void Update()
     {
         //  player.rigidBody.linearVelocity = new Vector2(player.moveInput * player.moveSpeed, player.rigidBody.linearVelocity.y);
 
@@ -27,14 +34,10 @@ public class Player_RunToIdle : IState
         if (Input.GetKeyDown(KeyCode.Space))
             player.stateManager.TransitionTo(player.stateManager.jumpState);
 
-        if (Input.GetMouseButtonDown(0))
-            player.stateManager.TransitionTo(player.stateManager.gunfireState);
+        player.AttackInput();
 
     }
-    public void Action()
-    {
-    }
-    public void Exit()
+    public override void Exit()
     {
         player.ePrevState = EPlayerStates.runToIdleState;
     }

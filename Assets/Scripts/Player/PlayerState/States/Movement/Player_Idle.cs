@@ -2,17 +2,24 @@ using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class Player_Idle : IState
+public class Player_Idle  : PlayerStateBase
 {
-    private PlayerController player;
 
-    public Player_Idle(PlayerController player) {  this.player = player; }
-    public void Enter() 
+    public Player_Idle(PlayerController player) : base(player)
+    {
+       
+    }
+    public override void Initialize()
+    {
+        cardTransitions["GunFire"] = player.stateManager.gunfireState;
+        cardTransitions["SwordAttack"] = player.stateManager.swordAttackState;
+    }
+    public override void Enter() 
     {
         //Debug.Log("Move !!!");
         player.animator.Play("Idle"); 
     }
-    public void Update()
+    public override void Update()
     {
         if (player.moveInput != 0)
             player.stateManager.TransitionTo(player.stateManager.runState);
@@ -23,18 +30,9 @@ public class Player_Idle : IState
         if (Input.GetKeyDown(KeyCode.Space))
             player.stateManager.TransitionTo(player.stateManager.jumpState);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            player.stateManager.TransitionTo(player.stateManager.gunfireState);
-            player.GetHand().UseLeftCard();
-            player.GetHand().RefreshHand();
-        }
-
+        player.AttackInput();
     }
-    public void Action() 
-    {
-    }
-    public void Exit()
+    public override void Exit()
     {
         player.ePrevState = EPlayerStates.idleState;
     }

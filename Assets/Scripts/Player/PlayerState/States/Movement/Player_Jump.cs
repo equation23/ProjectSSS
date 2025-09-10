@@ -1,16 +1,22 @@
 using UnityEngine;
 
-public class Player_Jump : IState
+public class Player_Jump : PlayerStateBase
 {
-    private PlayerController player;
 
-    public Player_Jump(PlayerController player) { this.player = player; }
-    public void Enter()
+    public Player_Jump(PlayerController player) :base(player)
+    {
+
+    }
+    public override void Initialize()
+    {
+
+    }
+    public override void Enter()
     {
         player.animator.Play("Jump");
         player.rigidBody.AddForceY(player.jumpForce, ForceMode2D.Impulse);
     }
-    public void Update()
+    public override void Update()
     {       
         // 방향 전환
         if (player.moveInput != 0)
@@ -29,10 +35,10 @@ public class Player_Jump : IState
             player.stateManager.TransitionTo(player.stateManager.fallState);
         }
     }
-    public void Action() 
+    public override void CardAction(string CardName) 
     {
     }
-    public void Exit() 
+    public override void Exit() 
     {
         player.ePrevState = EPlayerStates.jumpState;
     }

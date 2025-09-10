@@ -38,12 +38,12 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
     public CardHand GetHand() { return hand; }
     private void Awake()
     {
+        rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         animator = GetComponent<Animator>();
-        rigidBody = GetComponent<Rigidbody2D>(); // Player에 Rigidbody2D 컴포넌트가 있어야 함
 
         // Card Initialize
-        deck = new Deck_Gun_Pistol();
+        deck = new Deck_Basic();
         deck.Initialize();
         hand = new CardHand(this, deck);
 
@@ -152,9 +152,22 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
         return transform.localScale.x > 0;
     }
 
+    public void AttackInput()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            GetHand().UseLeftCard();
+            GetHand().RefreshHand();
+        }
+        else if(Input.GetMouseButtonDown(1))
+        {
+            GetHand().UseRightCard();
+            GetHand().RefreshHand();
+        }
+    }
     public void Use_Attack_Card(string cardName) 
-    { 
-    
+    {
+        stateManager.TransitionToAttack(cardName);
     }
 
 }

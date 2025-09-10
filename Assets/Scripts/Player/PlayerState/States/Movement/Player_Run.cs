@@ -1,14 +1,21 @@
 using UnityEngine;
 
-public class Player_Run : IState
+public class Player_Run : PlayerStateBase
 {
-    private PlayerController player;
-    public Player_Run(PlayerController player) { this.player = player; }
-    public void Enter()
+
+    public Player_Run(PlayerController player) : base(player)
+    {
+      
+    }
+    public override void Initialize()
+    {
+        cardTransitions["GunFire"] = player.stateManager.gunRunfireState;
+    }
+    public override void Enter()
     {
         player.animator.Play("Run");
     }
-    public void Update()
+    public override void Update()
     {
         //  player.rigidBody.linearVelocity = new Vector2(player.moveInput * player.moveSpeed, player.rigidBody.linearVelocity.y);
 
@@ -31,13 +38,10 @@ public class Player_Run : IState
             player.stateManager.TransitionTo(player.stateManager.fallState);
         }
 
-        if (Input.GetMouseButtonDown(0))
-            player.stateManager.TransitionTo(player.stateManager.gunRunfireState);
+        player.AttackInput();
     }
-    public void Action()
-    {
-    }
-    public void Exit()
+
+    public override void Exit()
     {
         player.ePrevState = EPlayerStates.runState;
     }

@@ -1,17 +1,23 @@
 using UnityEngine;
 
-public class Player_Attack_GunRunFire : IState
+public class Player_Attack_GunRunFire : PlayerStateBase
 {
-    private PlayerController player;
-    public Player_Attack_GunRunFire(PlayerController player) { this.player = player; }
 
-    public void Enter()
+    public Player_Attack_GunRunFire(PlayerController player) : base(player)
+    {
+
+    }
+    public override void Initialize()
+    {
+
+    }
+    public override void Enter()
     {
         //player.rigidBody.linearVelocity = new Vector2(0, player.rigidBody.linearVelocity.y);
 
         player.animator.Play("GunRunFire");
     }
-    public void Update()
+    public override void Update()
     {
         player.MovePlayer();
         // 방향 전환
@@ -39,10 +45,8 @@ public class Player_Attack_GunRunFire : IState
         }
        
     }
-    public void Action()
-    {
-    }
-    public void Exit()
+ 
+    public override void Exit()
     {
         player.ePrevState = EPlayerStates.attack_GunRunFire;
 

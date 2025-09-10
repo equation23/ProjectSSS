@@ -1,11 +1,17 @@
 using UnityEngine;
 
-public class Player_WallJump : IState
+public class Player_WallJump : PlayerStateBase
 {
-    private PlayerController player;
 
-    public Player_WallJump(PlayerController player) { this.player = player; }
-    public void Enter()
+    public Player_WallJump(PlayerController player) : base(player)
+    {
+
+    }
+    public override void Initialize()
+    {
+
+    }
+    public override void Enter()
     {
 
         player.animator.Play("WallJump");
@@ -25,7 +31,7 @@ public class Player_WallJump : IState
         player.rigidBody.AddForce(jumpVelocity, ForceMode2D.Impulse);
        // player.rigidBody.linearVelocity = jumpVelocity;   // 속도를 직접 세팅
     }
-    public void Update()
+    public override void Update()
     {
 
 
@@ -34,10 +40,8 @@ public class Player_WallJump : IState
             player.stateManager.TransitionTo(player.stateManager.fallState);
         }
     }
-    public void Action()
-    {
-    }
-    public void Exit()
+
+    public override void Exit()
     {
         player.ePrevState = EPlayerStates.wallJumpState;
     }
