@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour, CardUsing_Interface
+{
 
     [Header("Settings")]
     public float jumpForce = 12f;
@@ -29,11 +30,23 @@ public class PlayerController : MonoBehaviour {
     private float leftPressTime = -1f;
     private float rightPressTime = -1f;
 
+
+    private Deck deck;
+    private CardHand hand;
+
+
+    public CardHand GetHand() { return hand; }
     private void Awake()
     {
         rigidBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>(); // Player에 Rigidbody2D 컴포넌트가 있어야 함
+
+        // Card Initialize
+        deck = new Deck_Gun_Pistol();
+        deck.Initialize();
+        hand = new CardHand(this, deck);
+
     }
     void Start()
     {
@@ -138,4 +151,10 @@ public class PlayerController : MonoBehaviour {
     {
         return transform.localScale.x > 0;
     }
+
+    public void Use_Attack_Card(string cardName) 
+    { 
+    
+    }
+
 }

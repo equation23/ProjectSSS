@@ -1,5 +1,6 @@
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Player_Idle : IState
 {
@@ -21,7 +22,14 @@ public class Player_Idle : IState
 
         if (Input.GetKeyDown(KeyCode.Space))
             player.stateManager.TransitionTo(player.stateManager.jumpState);
- 
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            player.stateManager.TransitionTo(player.stateManager.gunfireState);
+            player.GetHand().UseLeftCard();
+            player.GetHand().RefreshHand();
+        }
+
     }
     public void Action() 
     {

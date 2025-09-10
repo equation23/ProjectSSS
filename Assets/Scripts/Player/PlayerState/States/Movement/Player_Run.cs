@@ -20,7 +20,7 @@ public class Player_Run : IState
 
         if (player.moveInput == 0)
         {
-            player.stateManager.TransitionTo(player.stateManager.idleState);
+            player.stateManager.TransitionTo(player.stateManager.runToIdleState);
         }
         if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded())
         {
@@ -30,6 +30,9 @@ public class Player_Run : IState
         {
             player.stateManager.TransitionTo(player.stateManager.fallState);
         }
+
+        if (Input.GetMouseButtonDown(0))
+            player.stateManager.TransitionTo(player.stateManager.gunRunfireState);
     }
     public void Action()
     {

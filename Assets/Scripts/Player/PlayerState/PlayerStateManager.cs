@@ -12,6 +12,9 @@ public class PlayerStateManager
     public Player_Run runState;
     public Player_WallSlide wallSlideState;
     public Player_WallJump wallJumpState;
+    public Player_RunToIdle runToIdleState;
+    public Player_Attack_GunFire gunfireState;
+    public Player_Attack_GunRunFire gunRunfireState;
 
 
     public PlayerStateManager(PlayerController player)
@@ -23,6 +26,9 @@ public class PlayerStateManager
         this.runState = new Player_Run(player);
         this.wallSlideState = new Player_WallSlide(player);
         this.wallJumpState = new Player_WallJump(player);
+        this.runToIdleState = new Player_RunToIdle(player);
+        this.gunfireState = new Player_Attack_GunFire(player);
+        this.gunRunfireState = new Player_Attack_GunRunFire(player);
     }
     public void Initialize(IState startingState)
     {

@@ -19,6 +19,14 @@ public class Player_Land : IState
         {
             player.stateManager.TransitionTo(player.stateManager.idleState);
         }
+        if (player.moveInput != 0)
+            player.stateManager.TransitionTo(player.stateManager.runState);
+
+        if (player.rigidBody.linearVelocity.y < -0.1f)
+            player.stateManager.TransitionTo(player.stateManager.fallState);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            player.stateManager.TransitionTo(player.stateManager.jumpState);
     }
     public void Action()
     {
