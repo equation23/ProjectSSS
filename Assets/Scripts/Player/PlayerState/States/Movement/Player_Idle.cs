@@ -11,8 +11,8 @@ public class Player_Idle  : PlayerStateBase
     }
     public override void Initialize()
     {
-        cardTransitions["GunFire"] = player.stateManager.gunfireState;
-        cardTransitions["SwordAttack"] = player.stateManager.swordAttackState;
+        cardTransitions[CardEnum.GUNFIRE] = player.stateManager.gunfireState;
+        cardTransitions[CardEnum.SWORDATTACK_A] = player.stateManager.swordAttackState;
     }
     public override void Enter() 
     {

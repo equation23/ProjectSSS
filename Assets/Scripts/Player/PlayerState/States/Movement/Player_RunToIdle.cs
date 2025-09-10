@@ -9,7 +9,7 @@ public class Player_RunToIdle : PlayerStateBase
     }
     public override void Initialize()
     {
-        cardTransitions["GunFire"] = player.stateManager.gunfireState;
+        cardTransitions[CardEnum.GUNFIRE] = player.stateManager.gunfireState;
     }
     public override void Enter()
     {

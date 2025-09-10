@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Player_Attack_GunFire : PlayerStateBase
 {
@@ -16,6 +17,8 @@ public class Player_Attack_GunFire : PlayerStateBase
         //player.rigidBody.linearVelocity = new Vector2(0, player.rigidBody.linearVelocity.y);
 
         player.animator.Play("GunFire");
+
+        player.GetHand().ConsumePendingCard();
     }
     public override void Update()
     {

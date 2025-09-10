@@ -165,9 +165,11 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
             GetHand().RefreshHand();
         }
     }
-    public void Use_Attack_Card(string cardName) 
+    public bool Use_Attack_Card(CardEnum tag) 
     {
-        stateManager.TransitionToAttack(cardName);
+        return stateManager.TransitionToAttack(tag);
+
+      
     }
 
 }

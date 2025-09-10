@@ -4,20 +4,23 @@ using UnityEngine;
 public abstract class PlayerStateBase : IState
 {
     protected PlayerController player;
-    protected Dictionary<string, IState> cardTransitions
-        = new Dictionary<string, IState>();
+    protected Dictionary<CardEnum, IState> cardTransitions
+        = new Dictionary<CardEnum, IState>();
 
     public PlayerStateBase(PlayerController player)
     {
         this.player = player;
     }
 
-    public virtual void CardAction(string cardName)
+    public virtual bool CardAction(CardEnum cardTag)
     {
-        if (cardTransitions.TryGetValue(cardName, out var nextState))
+        if (cardTransitions.TryGetValue(cardTag, out var nextState))
         {
             player.stateManager.TransitionTo(nextState);
+
+            return true;
         }
+        return false;
     }
     public abstract void Initialize();
     public abstract void Enter();

@@ -62,9 +62,9 @@ public class PlayerStateManager
         }
     }
 
-    public void TransitionToAttack(string cardName)
+    public bool TransitionToAttack(CardEnum tag)
     {
-        CurrentState.CardAction(cardName);
+      return  CurrentState.CardAction(tag);
     }
     private T AddState<T>(PlayerController player, List<IState> states) where T : IState
     {

@@ -35,9 +35,7 @@ public class Player_Jump : PlayerStateBase
             player.stateManager.TransitionTo(player.stateManager.fallState);
         }
     }
-    public override void CardAction(string CardName) 
-    {
-    }
+
     public override void Exit() 
     {
         player.ePrevState = EPlayerStates.jumpState;

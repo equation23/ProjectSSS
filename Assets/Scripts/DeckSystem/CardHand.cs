@@ -1,5 +1,6 @@
 using System.Xml.Linq;
 using UnityEngine;
+using static UnityEngine.Rendering.GPUSort;
 
 public class CardHand
 {
@@ -7,7 +8,8 @@ public class CardHand
     private Card rightCard;
     private Deck deck;
     private CardUsing_Interface owner;
-
+    public Card LeftPendingCard; // 보류 중인 카드
+    public Card RightpendingCard; // 보류 중인 카드
 
 
     public CardHand(CardUsing_Interface owner, Deck deck)
@@ -25,44 +27,48 @@ public class CardHand
     public void RefreshHand()
     {
         if (deck == null) return;
+
         if (leftCard == null)
-            { leftCard = deck.DrawCard();
-            Debug.Log("Successful Draw LeftCard");  
-        }
+            leftCard = deck.DrawCard();
+       
         if (rightCard == null)
             rightCard = deck.DrawCard();
     }
     public bool UseLeftCard()
     {
        
-        if (leftCard == null )
-        {
-            Debug.Log("Fail No LeftCard");
-            return false;
-        
-        }
-        if( owner == null)
-        {
-            Debug.Log("Fail No Owner");
-            return false;
-        }
+        if (leftCard == null || owner == null)
+             return false;
 
-        Debug.Log("Success Use Card");
-        leftCard.Using_Card(owner);
-        deck.AddTomb(leftCard);
-        leftCard = null;
 
-        int Cards = deck.Count();
-        Debug.Log(Cards);
+        LeftPendingCard = leftCard;
+        leftCard.Using_Card(owner); // 모션 트리거만
         return true;
     }
     public bool UseRightCard()
     {
         if (rightCard == null || owner == null) return false;
-        rightCard.Using_Card(owner);
-        deck.AddTomb(rightCard);
-        rightCard = null;
 
+        RightpendingCard = rightCard;
+        rightCard.Using_Card(owner);
         return true;
+    }
+
+    public void ConsumePendingCard()
+    {
+        if (LeftPendingCard != null)
+        {
+            deck.AddTomb(LeftPendingCard);
+            LeftPendingCard = null;
+            leftCard = null; // 실제로 손에서 제거
+            RefreshHand();
+        }
+        if (RightpendingCard != null)
+        {
+            deck.AddTomb(RightpendingCard);
+            RightpendingCard = null;
+            rightCard = null; 
+            RefreshHand();
+        }
     }
 }

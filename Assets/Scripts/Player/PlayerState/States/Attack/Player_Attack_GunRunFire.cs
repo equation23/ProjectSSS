@@ -16,6 +16,8 @@ public class Player_Attack_GunRunFire : PlayerStateBase
         //player.rigidBody.linearVelocity = new Vector2(0, player.rigidBody.linearVelocity.y);
 
         player.animator.Play("GunRunFire");
+
+        player.GetHand().ConsumePendingCard();
     }
     public override void Update()
     {

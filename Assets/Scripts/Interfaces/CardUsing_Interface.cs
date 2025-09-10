@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface CardUsing_Interface
 {
-    public void Use_Attack_Card(string tag) { }
+    public bool Use_Attack_Card(CardEnum tag) ;
 }

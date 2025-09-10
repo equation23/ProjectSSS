@@ -16,6 +16,8 @@ public class Player_Attack_Sword : PlayerStateBase
         //player.rigidBody.linearVelocity = new Vector2(0, player.rigidBody.linearVelocity.y);
 
         player.animator.Play("SwordAttack");
+
+        player.GetHand().ConsumePendingCard();
     }
     public override void Update()
     {
