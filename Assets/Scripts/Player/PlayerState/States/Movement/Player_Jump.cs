@@ -9,7 +9,7 @@ public class Player_Jump : PlayerStateBase
     }
     public override void Initialize()
     {
-
+    
     }
     public override void Enter()
     {
@@ -18,16 +18,7 @@ public class Player_Jump : PlayerStateBase
     }
     public override void Update()
     {       
-        // 방향 전환
-        if (player.moveInput != 0)
-            player.transform.localScale = new Vector3(player.moveInput, 1, 1);
 
-        // player.rigidBody.linearVelocity = new Vector2(player.moveInput * player.moveSpeed, player.rigidBody.linearVelocity.y);
-        if (Input.GetKeyDown(KeyCode.Space) && player.IsTouchingWall())
-        {
-            player.stateManager.TransitionTo(player.stateManager.wallJumpState);
-            return;
-        }
         player.MovePlayer();
 
         if (player.rigidBody.linearVelocity.y < 0)
@@ -42,6 +33,12 @@ public class Player_Jump : PlayerStateBase
     }
     public override void HandleInput(InputType input)
     {
-
+        if (input == InputType.Jump)
+        {
+            if (!player.IsGrounded() && player.IsTouchingWall())
+            {
+                player.stateManager.TransitionTo(player.stateManager.wallJumpState);
+            }
+        }
     }
 }

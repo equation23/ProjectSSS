@@ -66,6 +66,11 @@ public class PlayerStateManager
     {
       return  CurrentState.CardAction(tag);
     }
+
+    public void HandleInput(InputType inputKey)
+    {
+        CurrentState.HandleInput(inputKey);
+    }
     private T AddState<T>(PlayerController player, List<IState> states) where T : IState
     {
         var state = (T)Activator.CreateInstance(typeof(T), new object[] { player });

@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, CardUsing_Interface
@@ -134,19 +135,37 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
 
     void HandleMoveInput()
     {
-        // 키 눌림 시간 기록
+        // 키 눌린 순간 기록
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+            leftPressTime = Time.time;
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            rightPressTime = Time.time;
+
+        // 현재 눌린 상태
         bool left = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
         bool right = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
 
         // 최종 이동 방향 계산
         if (left && right)
-            moveInput = (leftPressTime > rightPressTime) ? -1f : 1f;
-        else if (left) moveInput = -1f;
-        else if (right) moveInput = 1f;
-        else moveInput = 0f;
+            moveInput = (leftPressTime > rightPressTime) ? -1f : 1f; // 늦게 누른 쪽 우선
+        else if (left)
+            moveInput = -1f;
+        else if (right)
+            moveInput = 1f;
+        else
+            moveInput = 0f;
+
+        // 점프 키 입력
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            stateManager.HandleInput(InputType.Jump);
+        }
+
     }
     public void MovePlayer()
     {
+        if (moveInput != 0)
+            transform.localScale = new Vector3(moveInput, 1, 1);
         Vector2 velocity = rigidBody.linearVelocity;
         velocity.x = moveInput * moveSpeed;
         rigidBody.linearVelocity = velocity;
@@ -162,12 +181,10 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
         if (Input.GetMouseButtonDown(0))
         {
             GetHand().UseLeftCard();
-            GetHand().RefreshHand();
         }
         else if(Input.GetMouseButtonDown(1))
         {
             GetHand().UseRightCard();
-            GetHand().RefreshHand();
         }
     }
     public bool Use_Attack_Card(CardEnum tag) 

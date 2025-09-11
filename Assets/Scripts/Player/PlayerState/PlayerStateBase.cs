@@ -7,6 +7,7 @@ public abstract class PlayerStateBase : IState
     protected Dictionary<CardEnum, IState> cardTransitions
         = new Dictionary<CardEnum, IState>();
 
+    protected Dictionary<InputType, IState> inputTransitions = new();
     public PlayerStateBase(PlayerController player)
     {
         this.player = player;

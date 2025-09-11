@@ -12,7 +12,6 @@ public class Deck_Basic : Deck
         {
             Card_Attack_GunFire gunFire = new Card_Attack_GunFire();
             AddCard(gunFire);
-            Debug.Log("Add GunFire");
         }
            
 
@@ -21,10 +20,7 @@ public class Deck_Basic : Deck
             Card_Attack_Sword swordAttack = new Card_Attack_Sword();
 
             AddCard(swordAttack);
-            Debug.Log("Add SwordAttack");
         }
 
-    
-        Debug.Log(Count());
     }
 }

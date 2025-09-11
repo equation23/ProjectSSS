@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.XR;
@@ -11,6 +12,9 @@ public class Player_Idle  : PlayerStateBase
     }
     public override void Initialize()
     {
+
+        inputTransitions[InputType.Jump] = player.stateManager.jumpState;
+
         cardTransitions[CardEnum.GUNFIRE] = player.stateManager.gunfireState;
         cardTransitions[CardEnum.SWORDATTACK_A] = player.stateManager.swordAttackState;
     }
@@ -27,10 +31,7 @@ public class Player_Idle  : PlayerStateBase
         if (player.rigidBody.linearVelocity.y < -0.1f)
             player.stateManager.TransitionTo(player.stateManager.fallState);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            player.stateManager.TransitionTo(player.stateManager.jumpState);
 
-        //player.AttackInput();
     }
     public override void Exit()
     {
@@ -38,6 +39,7 @@ public class Player_Idle  : PlayerStateBase
     }
     public override void HandleInput(InputType input)
     {
-
+        if (inputTransitions.TryGetValue(input, out var nextState))
+            player.stateManager.TransitionTo(nextState);
     }
 }

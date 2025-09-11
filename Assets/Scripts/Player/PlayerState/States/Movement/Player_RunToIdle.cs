@@ -9,6 +9,8 @@ public class Player_RunToIdle : PlayerStateBase
     }
     public override void Initialize()
     {
+        inputTransitions[InputType.Jump] = player.stateManager.jumpState;
+
         cardTransitions[CardEnum.GUNFIRE] = player.stateManager.gunfireState;
     }
     public override void Enter()
@@ -17,7 +19,6 @@ public class Player_RunToIdle : PlayerStateBase
     }
     public override void Update()
     {
-        //  player.rigidBody.linearVelocity = new Vector2(player.moveInput * player.moveSpeed, player.rigidBody.linearVelocity.y);
 
         player.MovePlayer();
 
@@ -31,8 +32,6 @@ public class Player_RunToIdle : PlayerStateBase
         if (player.rigidBody.linearVelocity.y < -0.1f)
             player.stateManager.TransitionTo(player.stateManager.fallState);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            player.stateManager.TransitionTo(player.stateManager.jumpState);
 
 
     }
@@ -42,6 +41,7 @@ public class Player_RunToIdle : PlayerStateBase
     }
     public override void HandleInput(InputType input)
     {
-
+        if (inputTransitions.TryGetValue(input, out var nextState))
+            player.stateManager.TransitionTo(nextState);
     }
 }
