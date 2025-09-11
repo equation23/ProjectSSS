@@ -48,4 +48,9 @@ public class Player_WallSlide : PlayerStateBase
     {
         player.ePrevState = EPlayerStates.wallSlideState;
     }
+
+    public override void HandleInput(InputType input)
+    {
+
+    }
 }

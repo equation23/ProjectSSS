@@ -35,11 +35,15 @@ public class Player_Land : PlayerStateBase
         if (Input.GetKeyDown(KeyCode.Space))
             player.stateManager.TransitionTo(player.stateManager.jumpState);
 
-        player.AttackInput();
+
     }
     public override void Exit()
     {
         player.ePrevState = EPlayerStates.landState;
+    }
+    public override void HandleInput(InputType input)
+    {
+
     }
 }
 

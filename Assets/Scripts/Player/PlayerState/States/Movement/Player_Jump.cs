@@ -40,4 +40,8 @@ public class Player_Jump : PlayerStateBase
     {
         player.ePrevState = EPlayerStates.jumpState;
     }
+    public override void HandleInput(InputType input)
+    {
+
+    }
 }

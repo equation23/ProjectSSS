@@ -30,10 +30,14 @@ public class Player_Idle  : PlayerStateBase
         if (Input.GetKeyDown(KeyCode.Space))
             player.stateManager.TransitionTo(player.stateManager.jumpState);
 
-        player.AttackInput();
+        //player.AttackInput();
     }
     public override void Exit()
     {
         player.ePrevState = EPlayerStates.idleState;
+    }
+    public override void HandleInput(InputType input)
+    {
+
     }
 }

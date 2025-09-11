@@ -38,11 +38,15 @@ public class Player_Run : PlayerStateBase
             player.stateManager.TransitionTo(player.stateManager.fallState);
         }
 
-        player.AttackInput();
+
     }
 
     public override void Exit()
     {
         player.ePrevState = EPlayerStates.runState;
+    }
+    public override void HandleInput(InputType input)
+    {
+
     }
 }

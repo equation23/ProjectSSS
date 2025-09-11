@@ -41,4 +41,9 @@ public class Player_Fall : PlayerStateBase
     {
         player.ePrevState = EPlayerStates.fallState;
     }
+
+    public override void HandleInput(InputType input)
+    {
+        
+    }
 }

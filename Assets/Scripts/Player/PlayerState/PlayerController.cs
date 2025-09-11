@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
     public EPlayerStates ePrevState;
 
     private float raycastDistance = 0.1f;
+
     // 마지막 입력 시간 기록
     private float leftPressTime = -1f;
     private float rightPressTime = -1f;
@@ -33,7 +34,6 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
 
     private Deck deck;
     private CardHand hand;
-
 
     public CardHand GetHand() { return hand; }
     private void Awake()
@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
     }
     void Start()
     {
+        Managers.Input.KeyAction += HandleMoveInput;
+        Managers.Input.KeyAction += AttackInput;
+
+
         stateManager = new PlayerStateManager(this);
         stateManager.Initialize(stateManager.idleState); // Idle 상태로 시작
     }
@@ -57,8 +61,8 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
     // Update is called once per frame
     void Update()
     {
-  
-        HandleInput();
+
+        //HandleMoveInput();
 
         if (stateManager != null)
         {
@@ -67,6 +71,10 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
         }
     }
 
+
+
+
+    #region 지형 충돌 처리
     public bool IsGrounded()
     {
         float extraHeight = 0.1f;
@@ -121,21 +129,18 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
         Gizmos.DrawWireCube(origin, boxSize);
     }
 
-    void HandleInput()
+    #endregion
+
+
+    void HandleMoveInput()
     {
         // 키 눌림 시간 기록
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-            leftPressTime = Time.time;
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-            rightPressTime = Time.time;
-
-        // 현재 눌린 상태
         bool left = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
         bool right = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
 
         // 최종 이동 방향 계산
         if (left && right)
-            moveInput = leftPressTime > rightPressTime ? -1f : 1f; // 늦게 누른 쪽 우선
+            moveInput = (leftPressTime > rightPressTime) ? -1f : 1f;
         else if (left) moveInput = -1f;
         else if (right) moveInput = 1f;
         else moveInput = 0f;

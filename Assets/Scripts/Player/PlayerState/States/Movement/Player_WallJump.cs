@@ -45,4 +45,9 @@ public class Player_WallJump : PlayerStateBase
     {
         player.ePrevState = EPlayerStates.wallJumpState;
     }
+
+    public override void HandleInput(InputType input)
+    {
+
+    }
 }

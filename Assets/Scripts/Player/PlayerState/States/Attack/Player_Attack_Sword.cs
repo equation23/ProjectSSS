@@ -35,4 +35,9 @@ public class Player_Attack_Sword : PlayerStateBase
         player.ePrevState = EPlayerStates.attack_SwordAttack;
 
     }
+
+    public override void HandleInput(InputType input)
+    {
+
+    }
 }

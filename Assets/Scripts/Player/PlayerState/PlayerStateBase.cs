@@ -26,4 +26,6 @@ public abstract class PlayerStateBase : IState
     public abstract void Enter();
     public abstract void Update();
     public abstract void Exit();
+
+    public abstract void HandleInput(InputType input);
 }

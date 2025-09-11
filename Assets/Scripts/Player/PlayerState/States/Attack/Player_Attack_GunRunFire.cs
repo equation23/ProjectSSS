@@ -53,4 +53,9 @@ public class Player_Attack_GunRunFire : PlayerStateBase
         player.ePrevState = EPlayerStates.attack_GunRunFire;
 
     }
+
+    public override void HandleInput(InputType input)
+    {
+
+    }
 }
