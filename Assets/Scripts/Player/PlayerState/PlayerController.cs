@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
     private CardHand hand;
 
     public CardHand GetHand() { return hand; }
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -53,10 +54,12 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
     {
         Managers.Input.KeyAction += HandleMoveInput;
         Managers.Input.KeyAction += AttackInput;
-
+        Managers.UI.Initialize(hand, deck);
 
         stateManager = new PlayerStateManager(this);
         stateManager.Initialize(stateManager.idleState); // Idle 상태로 시작
+
+     
     }
 
     // Update is called once per frame
@@ -180,11 +183,17 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GetHand().UseLeftCard();
+            if (GetHand().UseLeftCard())
+            {
+                Managers.UI.UpdateCardUI();
+            }
         }
         else if(Input.GetMouseButtonDown(1))
         {
-            GetHand().UseRightCard();
+            if (GetHand().UseRightCard())
+            {
+Managers.UI.UpdateCardUI();
+            }
         }
     }
     public bool Use_Attack_Card(CardEnum tag) 

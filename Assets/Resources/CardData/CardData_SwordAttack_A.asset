@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f927a64f70762ac41932f85fd2de8dbc, type: 3}
+  m_Name: CardData_SwordAttack_A
+  m_EditorClassIdentifier: 
+  cardEnum: 1
+  cardSprite: {fileID: -4403827252363246863, guid: 292fbfd4e2465df409c246eb4a5e2ae9, type: 3}
+  cardName: SwordAttack
+  description: Sword Attack Type A
+  cost: 1

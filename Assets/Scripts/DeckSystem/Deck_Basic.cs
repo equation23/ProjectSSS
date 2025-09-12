@@ -8,7 +8,7 @@ public class Deck_Basic : Deck
      
       
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             Card_Attack_GunFire gunFire = new Card_Attack_GunFire();
             AddCard(gunFire);

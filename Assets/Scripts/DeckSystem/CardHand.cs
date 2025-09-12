@@ -11,6 +11,8 @@ public class CardHand
     private CardUsing_Interface owner;
     public Card LeftPendingCard; // 보류 중인 카드
     public Card RightpendingCard; // 보류 중인 카드
+    public Card GetLeftCard() => leftCard;
+    public Card GetRightCard() => rightCard;
 
     public CardHand(CardUsing_Interface owner, Deck deck)
     {
@@ -32,7 +34,7 @@ public class CardHand
         {
             leftCard = deck.DrawCard();
         
-            Debug.Log("leftCard Draw");
+            //Debug.Log("leftCard Draw");
           
         }
         ;
@@ -40,7 +42,7 @@ public class CardHand
         if (rightCard == null)
         {
             rightCard = deck.DrawCard();
-            Debug.Log("Right Card Draw");
+           // Debug.Log("Right Card Draw");
         }
     }
     public bool UseLeftCard()
@@ -52,7 +54,10 @@ public class CardHand
         
         LeftPendingCard = leftCard;
         if (!leftCard.Using_Card(owner))
-            LeftPendingCard = null; // 모션 트리거만
+        {
+            LeftPendingCard = null;// 모션 트리거만
+            return false;
+        }
         return true;
     }
     public bool UseRightCard()
@@ -61,7 +66,10 @@ public class CardHand
 
         RightpendingCard = rightCard;
         if (!rightCard.Using_Card(owner))
+        {
             RightpendingCard = null;
+            return false;
+        }
         return true;
     }
 
