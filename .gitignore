@@ -57,3 +57,7 @@ Thumbs.db
 *.apk
 *.aab
 *.unitypackage
+
+Assets/DeadRevolver/
+Assets/Resources/Sprites/
+Assets/Resources/Texture2D/
