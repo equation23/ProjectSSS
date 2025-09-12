@@ -10,6 +10,10 @@ public class Player_Fall : PlayerStateBase
     {
 
     }
+    public override void Enter(CardData cardData)
+    {
+
+    }
     public override void Enter()
     {
         player.animator.Play("JumpFall");

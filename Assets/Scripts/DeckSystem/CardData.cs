@@ -9,4 +9,5 @@ public class CardData : ScriptableObject
     [TextArea]
     public string description;     // 카드 설명
     public int cost;               // 사용 비용 
+    public int Damage;             // 데미지
 }

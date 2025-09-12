@@ -53,7 +53,12 @@ public class PlayerStateManager
         CurrentState = nextState;
         nextState.Enter();
     }
-
+    public void TransitionTo(IState nextState, CardData cardData)
+    {
+        CurrentState.Exit();
+        CurrentState = nextState;
+        nextState.Enter(cardData);
+    }
     public void Update()
     {
         if (CurrentState != null)
@@ -62,9 +67,9 @@ public class PlayerStateManager
         }
     }
 
-    public bool TransitionToAttack(CardEnum tag)
+    public bool TransitionToAttack(CardEnum tag, CardData cardData)
     {
-      return  CurrentState.CardAction(tag);
+      return  CurrentState.CardAction(tag, cardData);
     }
 
     public void HandleInput(InputType inputKey)

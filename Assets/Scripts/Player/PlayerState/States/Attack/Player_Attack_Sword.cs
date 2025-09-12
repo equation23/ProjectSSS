@@ -11,6 +11,14 @@ public class Player_Attack_Sword : PlayerStateBase
     {
 
     }
+    public override void Enter(CardData cardData)
+    {
+        player.animator.Play("SwordAttack");
+
+        player.GetHand().ConsumePendingCard();
+        player.swordCollider.CollisionStart(cardData.Damage,player.boxCollider);
+    }
+
     public override void Enter()
     {
         //player.rigidBody.linearVelocity = new Vector2(0, player.rigidBody.linearVelocity.y);

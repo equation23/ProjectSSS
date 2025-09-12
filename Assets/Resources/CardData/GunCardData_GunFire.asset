@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd85f42300f52c48b4a11712c6d2a68, type: 3}
+  m_Name: GunCardData_GunFire
+  m_EditorClassIdentifier: 
+  cardEnum: 0
+  cardSprite: {fileID: -5650605348744983942, guid: 7b2b2c952a0a4a142bbd80a8202e3de0, type: 3}
+  cardName: GunFire
+  description: GunFiring
+  cost: 1
+  Damage: 1
+  bulletPrefab: {fileID: 8978044157267030957, guid: a728973fb80f402419e8ad96927046be, type: 3}
+  bulletSpeed: 10
+  bulletLifetime: 5
+  bulletSprite: {fileID: 21300000, guid: 05e7af0be27155e4b8475415b3c0cc9f, type: 3}

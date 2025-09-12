@@ -21,6 +21,7 @@ public class Deck_Basic : Deck
 
             AddCard(swordAttack);
         }
-
+        Card_Attack_GunFire gunFire2 = new Card_Attack_GunFire();
+        AddCard(gunFire2);
     }
 }

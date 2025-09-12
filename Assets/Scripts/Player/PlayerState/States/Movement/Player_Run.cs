@@ -13,6 +13,10 @@ public class Player_Run : PlayerStateBase
 
         cardTransitions[CardEnum.GUNFIRE] = player.stateManager.gunRunfireState;
     }
+    public override void Enter(CardData cardData)
+    {
+
+    }
     public override void Enter()
     {
         player.animator.Play("Run");

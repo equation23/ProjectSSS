@@ -17,3 +17,4 @@ MonoBehaviour:
   cardName: SwordAttack
   description: Sword Attack Type A
   cost: 1
+  Damage: 2

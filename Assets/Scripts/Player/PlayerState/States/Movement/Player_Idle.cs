@@ -18,6 +18,10 @@ public class Player_Idle  : PlayerStateBase
         cardTransitions[CardEnum.GUNFIRE] = player.stateManager.gunfireState;
         cardTransitions[CardEnum.SWORDATTACK_A] = player.stateManager.swordAttackState;
     }
+    public override void Enter(CardData cardData)
+    {
+
+    }
     public override void Enter() 
     {
         //Debug.Log("Move !!!");

@@ -1,7 +1,7 @@
 using System.Threading;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, CardUsing_Interface
+public class PlayerController : MonoBehaviour, CardUsing_Interface, IAttack_Interface
 {
 
     [Header("Settings")]
@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
     private Deck deck;
     private CardHand hand;
 
+    [Header("Combat")]
+    public Combat_Sword_Collider swordCollider;
+    public Transform firePoint;
     public CardHand GetHand() { return hand; }
 
     private void Awake()
@@ -43,7 +46,7 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         animator = GetComponent<Animator>();
-
+        
         // Card Initialize
         deck = new Deck_Basic();
         deck.Initialize();
@@ -196,11 +199,29 @@ Managers.UI.UpdateCardUI();
             }
         }
     }
-    public bool Use_Attack_Card(CardEnum tag) 
+    public bool Use_Attack_Card(CardEnum tag, CardData cardData) 
     {
-        return stateManager.TransitionToAttack(tag);
+        return stateManager.TransitionToAttack(tag, cardData);
 
       
     }
 
+    public void TakeDamage(int damage)
+    {
+        Debug.Log("PlayerDamaged"+ damage);
+    }
+
+    public void ShootBullet(GunCardData data)
+    {
+        if (data == null || data.bulletPrefab == null || firePoint == null) return;
+
+        // 총알 생성
+        GameObject bulletObj = Instantiate(data.bulletPrefab, firePoint.position, Quaternion.identity);
+
+        // 방향 계산
+        Vector2 dir = IsFacingRight() ? Vector2.right : Vector2.left;
+
+        // Bullet.cs 초기화 호출
+        bulletObj.GetComponent<Bullet>().Initialize(data, dir, boxCollider);
+    }
 }

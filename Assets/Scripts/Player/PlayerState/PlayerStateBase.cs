@@ -13,11 +13,11 @@ public abstract class PlayerStateBase : IState
         this.player = player;
     }
 
-    public virtual bool CardAction(CardEnum cardTag)
+    public virtual bool CardAction(CardEnum cardTag, CardData cardData)
     {
         if (cardTransitions.TryGetValue(cardTag, out var nextState))
         {
-            player.stateManager.TransitionTo(nextState);
+            player.stateManager.TransitionTo(nextState, cardData);
 
             return true;
         }
@@ -25,6 +25,7 @@ public abstract class PlayerStateBase : IState
     }
     public abstract void Initialize();
     public abstract void Enter();
+    public abstract void Enter(CardData cardData);
     public abstract void Update();
     public abstract void Exit();
 

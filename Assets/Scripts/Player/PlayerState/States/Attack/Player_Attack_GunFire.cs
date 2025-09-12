@@ -12,6 +12,16 @@ public class Player_Attack_GunFire : PlayerStateBase
     {
 
     }
+    public override void Enter(CardData cardData)
+    {
+        player.animator.Play("GunFire");
+
+        player.GetHand().ConsumePendingCard();
+
+        GunCardData gcd = cardData as GunCardData;
+        player.ShootBullet(gcd);
+
+    }
     public override void Enter()
     {
         //player.rigidBody.linearVelocity = new Vector2(0, player.rigidBody.linearVelocity.y);

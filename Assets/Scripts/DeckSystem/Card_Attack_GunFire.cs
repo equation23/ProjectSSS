@@ -6,14 +6,20 @@ public class Card_Attack_GunFire :Card
 
     public Card_Attack_GunFire()
     {
-        data = Resources.Load<CardData>("CardData/CardData_GunFire");
+        data = Resources.Load<CardData>("CardData/GunCardData_GunFire");
         cardEnum = CardEnum.GUNFIRE;
     }
     public override bool Using_Card(CardUsing_Interface owner)
     {
         if (owner == null) return false;
-        return owner.Use_Attack_Card(cardEnum);
 
-      
+        GunCardData gunData = data as GunCardData;
+        if (gunData != null)
+        {
+            return owner.Use_Attack_Card(cardEnum, gunData);
+        }
+
+        return false;
+
     }
 }

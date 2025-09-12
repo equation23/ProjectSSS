@@ -13,9 +13,9 @@ TagManager:
   - UI
   - Obstacle
   - Wall
-  - 
-  - 
-  - 
+  - Player
+  - Monster
+  - Projectile
   - 
   - 
   - 
@@ -40,6 +40,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: NPC
+    uniqueID: 800947391
+    locked: 0
+  - name: Monster
+    uniqueID: 4259700263
+    locked: 0
+  - name: Player
+    uniqueID: 2221709809
     locked: 0
   m_RenderingLayers:
   - Default

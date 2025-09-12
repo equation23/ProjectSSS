@@ -13,6 +13,10 @@ public class Player_Land : PlayerStateBase
 
         cardTransitions[CardEnum.GUNFIRE] = player.stateManager.gunfireState;
     }
+    public override void Enter(CardData cardData)
+    {
+
+    }
     public override void Enter()
     {
         //player.rigidBody.linearVelocity = new Vector2(0, player.rigidBody.linearVelocity.y);

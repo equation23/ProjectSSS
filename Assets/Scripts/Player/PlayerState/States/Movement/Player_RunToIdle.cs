@@ -13,6 +13,10 @@ public class Player_RunToIdle : PlayerStateBase
 
         cardTransitions[CardEnum.GUNFIRE] = player.stateManager.gunfireState;
     }
+    public override void Enter(CardData cardData)
+    {
+
+    }
     public override void Enter()
     {
         player.animator.Play("RunToIdle");

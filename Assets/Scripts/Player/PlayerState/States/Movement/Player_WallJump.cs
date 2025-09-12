@@ -11,6 +11,10 @@ public class Player_WallJump : PlayerStateBase
     {
 
     }
+    public override void Enter(CardData cardData)
+    {
+
+    }
     public override void Enter()
     {
 

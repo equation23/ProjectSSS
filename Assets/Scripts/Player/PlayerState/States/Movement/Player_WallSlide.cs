@@ -14,6 +14,11 @@ public class Player_WallSlide : PlayerStateBase
     {
         inputTransitions[InputType.Jump] = player.stateManager.wallJumpState;
     }
+    public override void Enter(CardData cardData)
+    {
+
+    }
+
     public override void Enter()
     {
         player.animator.Play("WallSlide");

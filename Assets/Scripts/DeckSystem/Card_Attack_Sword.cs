@@ -14,7 +14,7 @@ public class Card_Attack_Sword : Card
     public override bool Using_Card(CardUsing_Interface owner)
     {
         if (owner == null) return false;
-        return owner.Use_Attack_Card(cardEnum);
+        return owner.Use_Attack_Card(cardEnum,data);
 
        
     }
