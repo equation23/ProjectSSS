@@ -18,7 +18,7 @@ public class Player_Jump : PlayerStateBase
     public override void Enter()
     {
         player.animator.Play("Jump");
-        player.rigidBody.AddForceY(player.jumpForce, ForceMode2D.Impulse);
+        player.rigidBody.AddForceY(player.movementController.jumpForce, ForceMode2D.Impulse);
     }
     public override void Update()
     {       
@@ -39,7 +39,7 @@ public class Player_Jump : PlayerStateBase
     {
         if (input == InputType.Jump)
         {
-            if (!player.IsGrounded() && player.IsTouchingWall())
+            if (!player.movementController.IsGrounded() && player.movementController.IsTouchingWall())
             {
                 player.stateManager.TransitionTo(player.stateManager.wallJumpState);
             }

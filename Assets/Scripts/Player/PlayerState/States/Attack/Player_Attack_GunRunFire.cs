@@ -33,10 +33,10 @@ public class Player_Attack_GunRunFire : PlayerStateBase
         if (player.moveInput != 0)
             player.transform.localScale = new Vector3(player.moveInput, 1, 1);
 
-        if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && player.movementController.IsGrounded())
             player.stateManager.TransitionTo(player.stateManager.jumpState);
 
-        if (!player.IsGrounded())
+        if (!player.movementController.IsGrounded())
             player.stateManager.TransitionTo(player.stateManager.fallState);
         if (player.moveInput == 0)
         {

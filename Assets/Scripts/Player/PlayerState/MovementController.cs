@@ -47,12 +47,12 @@ public class MovementController
         return hit.collider != null;
     }
 
-    public bool IsTouchingWall(bool facingRight)
+    public bool IsTouchingWall()
     {
         Bounds bounds = boxCollider.bounds;
         Vector2 origin = bounds.center;
         Vector2 size = new Vector2(bounds.size.x, bounds.size.y * 0.8f);
-        int direction = facingRight ? 1 : -1;
+        int direction = IsFacingRight() ? 1 : -1;
 
         return Physics2D.BoxCast(origin, size, 0f, Vector2.right * direction, 0.1f, obstacleLayer);
     }

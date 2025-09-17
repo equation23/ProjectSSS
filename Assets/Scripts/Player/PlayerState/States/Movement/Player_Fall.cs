@@ -30,9 +30,9 @@ public class Player_Fall : PlayerStateBase
         else if(player.ePrevState != EPlayerStates.wallJumpState)
            player.MovePlayer();
 
-        if (player.IsGrounded())
+        if (player.movementController.IsGrounded())
             player.stateManager.TransitionTo(player.stateManager.landState);
-        else if (player.IsTouchingWall())
+        else if (player.movementController.IsTouchingWall())
             player.stateManager.TransitionTo(player.stateManager.wallSlideState);
 
             

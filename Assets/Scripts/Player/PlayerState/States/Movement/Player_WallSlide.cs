@@ -33,9 +33,9 @@ public class Player_WallSlide : PlayerStateBase
         // player.rigidBody.linearVelocity = new Vector2(player.moveInput * player.moveSpeed, player.rigidBody.linearVelocity.y);
         player.MovePlayer();
 
-        if (player.IsGrounded())
+        if (player.movementController.IsGrounded())
             player.stateManager.TransitionTo(player.stateManager.landState);
-        else if (!player.IsTouchingWall())
+        else if (!player.movementController.IsTouchingWall())
             player.stateManager.TransitionTo(player.stateManager.fallState);
     }
 

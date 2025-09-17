@@ -34,7 +34,7 @@ public class Player_Run : PlayerStateBase
         //{
         //    player.stateManager.TransitionTo(player.stateManager.jumpState);
         //}
-        if (!player.IsGrounded())
+        if (!player.movementController.IsGrounded())
         {
             player.stateManager.TransitionTo(player.stateManager.fallState);
         }

@@ -4,12 +4,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, CardUsing_Interface, IAttack_Interface
 {
 
-    [Header("Settings")]
-    public float jumpForce = 12f;
-    public float moveSpeed;
-    public float wallSlideSpeed = 2f;
-    public float wallJumpForce = 12f;
-
     public PlayerStateManager stateManager;
 
     [Header("References")]
@@ -24,9 +18,11 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface, IAttack_Inte
 
 
     [HideInInspector] public float moveInput;
+    public MovementController movementController = new MovementController();
+
     public EPlayerStates ePrevState;
 
-    private float raycastDistance = 0.1f;
+    //private float raycastDistance = 0.1f;
 
     // 마지막 입력 시간 기록
     private float leftPressTime = -1f;
@@ -46,7 +42,8 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface, IAttack_Inte
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         animator = GetComponent<Animator>();
-        
+        movementController.Initialize(rigidBody, boxCollider,transform, obstacleLayer);
+
         // Card Initialize
         deck = new Deck_Basic();
         deck.Initialize();
@@ -80,65 +77,6 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface, IAttack_Inte
 
 
 
-
-    #region 지형 충돌 처리
-    public bool IsGrounded()
-    {
-        float extraHeight = 0.1f;
-
-        // X폭은 살짝 줄이고 Y는 얇게
-        Vector2 boxSize = new Vector2(boxCollider.bounds.size.x * 0.7f, 0.05f);
-
-        // origin = Collider 바닥에서 살짝 아래
-        Vector2 origin = new Vector2(
-            boxCollider.bounds.center.x,
-            boxCollider.bounds.min.y - 0.01f
-        );
-
-        RaycastHit2D hit = Physics2D.BoxCast(
-            origin,
-            boxSize,
-            0f,
-            Vector2.down,
-            extraHeight,
-            obstacleLayer
-        );
-
-        return hit.collider != null;
-    }
-    public bool IsTouchingWall()
-    {
-
-        Bounds bounds = GetComponent<BoxCollider2D>().bounds;
-        // 중심에서 시작
-        Vector2 origin = bounds.center;
-        // 박스 크기: Y축을 살짝 줄여서 발판을 안 건드리도록
-        Vector2 size = new Vector2(bounds.size.x, bounds.size.y * 0.8f);
-
-        int direction = IsFacingRight() ? 1 : -1;
-        bool isWall = Physics2D.BoxCast(
-            origin,
-            size,
-            0f,
-            Vector2.right * direction,
-            raycastDistance,
-            obstacleLayer
-        );
-        return isWall;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (!boxCollider) return;
-        Gizmos.color = Color.red;
-        Vector2 boxSize = new Vector2(boxCollider.bounds.size.x * 0.7f, 0.05f);
-        Vector2 origin = new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.min.y - 0.01f);
-        Gizmos.DrawWireCube(origin, boxSize);
-    }
-
-    #endregion
-
-
     void HandleMoveInput()
     {
         // 키 눌린 순간 기록
@@ -170,16 +108,7 @@ public class PlayerController : MonoBehaviour, CardUsing_Interface, IAttack_Inte
     }
     public void MovePlayer()
     {
-        if (moveInput != 0)
-            transform.localScale = new Vector3(moveInput, 1, 1);
-        Vector2 velocity = rigidBody.linearVelocity;
-        velocity.x = moveInput * moveSpeed;
-        rigidBody.linearVelocity = velocity;
-    }
-
-    public bool IsFacingRight()
-    {
-        return transform.localScale.x > 0;
+            movementController.Move(moveInput);
     }
 
     public void AttackInput()
@@ -219,7 +148,7 @@ Managers.UI.UpdateCardUI();
         GameObject bulletObj = Instantiate(data.bulletPrefab, firePoint.position, Quaternion.identity);
 
         // 방향 계산
-        Vector2 dir = IsFacingRight() ? Vector2.right : Vector2.left;
+        Vector2 dir = movementController.IsFacingRight() ? Vector2.right : Vector2.left;
 
         // Bullet.cs 초기화 호출
         bulletObj.GetComponent<Bullet>().Initialize(data, dir, boxCollider);
