@@ -11,14 +11,11 @@ public class Managers : MonoBehaviour
     UIManager _ui = new UIManager();
     public static UIManager UI { get { return Instance._ui; } }
 
-    private UI_Root _root; // Root Canvas
-
 
     void Awake()
     {
         Initialize();
         // UI_Root 연결
-        _root = UI_Root.Instance;
         _ui.SetRoot(UI_Root.Instance);
     }
     private void Start()

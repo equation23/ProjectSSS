@@ -1,5 +1,5 @@
 using UnityEngine;
-public enum InputType { Jump, Dash }
+
 public interface IState
 {
 

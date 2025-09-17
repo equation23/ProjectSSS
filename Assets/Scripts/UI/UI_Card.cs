@@ -5,7 +5,6 @@ public class UI_Card : UI_Base
 {
     public Image cardImage;
 
-    // 현재 표시 중인 카드 참조
     public Card CurrentCard { get; private set; }
 
     public void SetCard(Card card)

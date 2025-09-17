@@ -6,6 +6,9 @@ public class UI_DeckPreview : MonoBehaviour
     public UI_Card[] previewSlots; // 미리보기 슬롯 배열
     private Deck deck;
 
+    float duration = 0.3f;
+    float dropOffset = 100f;
+
     public void Initialize(Deck deck)
     {
         this.deck = deck;
@@ -26,7 +29,7 @@ public class UI_DeckPreview : MonoBehaviour
         }
     }
 
-    public void ShiftDownToHand(UI_Hand handUI, float duration = 0.3f, float dropOffset = 100f)
+    public void ShiftDownToHand(UI_Hand handUI)
     {
 
         var topSlot = previewSlots[0];
@@ -66,10 +69,8 @@ public class UI_DeckPreview : MonoBehaviour
             int currentIndex = i;
             var slot = previewSlots[currentIndex];
 
-            // 다음 카드 데이터
             var nextCard = previewSlots[currentIndex + 1].GetCard();
 
-            // 임시 카드 UI를 위쪽(dropOffset)에서 시작
             var img = slot.cardImage;
             Vector3 startPos = img.rectTransform.localPosition + new Vector3(0, dropOffset, 0);
 

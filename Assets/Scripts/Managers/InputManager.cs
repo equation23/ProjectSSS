@@ -1,16 +1,16 @@
-using System;
-using UnityEngine;
-
-public class InputManager
-{
-    public Action KeyAction = null;
-
-    public void OnUpdate()
+    using System;
+    using UnityEngine;
+    public enum InputType { Jump, Dash }
+    public class InputManager
     {
-        //if (Input.anyKey == false)
-        //    return;
+        public Action KeyAction = null;
 
-        if (KeyAction != null)
-            KeyAction.Invoke();
+        public void OnUpdate()
+        {
+            //if (Input.anyKey == false)
+            //    return;
+
+            if (KeyAction != null)
+                KeyAction.Invoke();
+        }
     }
-}
